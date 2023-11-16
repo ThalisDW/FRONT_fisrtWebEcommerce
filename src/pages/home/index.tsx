@@ -4,8 +4,15 @@ import AppBarMenu from "../../components/appBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CardCategories from "../../components/cards/cardCategories";
 import { MobileMenu } from "../../components/mobileMenu";
+import { useEffect, useState } from "react";
+import validaToken from "../../functions/validaToken";
 
 export default function Home() {
+ 
+  useEffect(() => {
+    validaToken()
+  }, []);
+
   const isXsScreen = useMediaQuery("(max-width:600px)");
 
   interface ICategorias {
