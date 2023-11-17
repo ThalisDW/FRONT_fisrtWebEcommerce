@@ -56,7 +56,7 @@ export const ListProducts = () => {
                     campo2="Horários"
                     link3="/informations"
                     campo3="Informações"
-                    link4="/"
+                    link4="/Home"
                     campo4="Categorias"
                 />
 
@@ -166,7 +166,7 @@ export const ListProducts = () => {
                     />
                 </Grid>
                 <Grid xs={12}  width={'100vw'} position={"fixed"} bottom={0}>
-                            <MobileMenu link1="/" link2="/hours" link3="/informations" pageAtual="cardapios" />
+                            <MobileMenu link1="/Home" link2="/hours" link3="/informations" pageAtual="cardapios" />
 
                         </Grid>
             </Box>

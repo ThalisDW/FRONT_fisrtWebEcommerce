@@ -8,10 +8,14 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Grid, TextField, useMediaQuery } from "@mui/material";
 
+let description = ''
+
 const ErrorModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   isOpen,
   onClose,
 }) => {
+
+
   return (
     <Dialog
       open={isOpen}
@@ -20,7 +24,7 @@ const ErrorModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     >
       <DialogTitle>Erro no Login</DialogTitle>
       <DialogContent>
-        <p>Usuário ou senha inválido.</p>
+        <p>{description}</p>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
@@ -37,6 +41,12 @@ export const Login = () => {
   const [error, setError] = useState(false);
 
   const handleLogin = async () => {
+
+    if (username.length < 5 || password.length < 6) {
+        description = `Digite um usuário e senha válido.`
+       return setError(true);
+    }
+
     try {
       const response = await fetch("http://localhost:8080/login", {
         method: "POST",
@@ -49,6 +59,7 @@ export const Login = () => {
       const data = await response.json();
 
       if (!data.message && data.result.length === 0) {
+        description = 'Usuário ou senha inválidos.'
         setError(true);
       } else if (data.message && data.result.length === 1) {
         const infosUser = data.result;
@@ -56,13 +67,17 @@ export const Login = () => {
           if (el.user_token === "783JKl9a0s2P4ZQ") {
             const token = el.user_token;
             localStorage.setItem("token", token);
+            window.location.assign('/Home')
           }
         });
       } else {
-        console.log(`${data.result.name}`);
+        description = `Ocorreu um erro ao fazer login: ${data.result.name}`
+        setError(true);
+        console.log(`${data.result}`);
       }
     } catch (error) {
       console.error("Erro ao processar o login:", error);
+      description = `Ocorreu um erro ao fazer login: ${error}`
       setError(true);
     }
   };

@@ -10,7 +10,11 @@ import validaToken from "../../functions/validaToken";
 export default function Home() {
  
   useEffect(() => {
-    validaToken()
+    const storedToken = localStorage.getItem('token');
+    if (storedToken == null) {
+      validaToken()
+      
+    }
   }, []);
 
   const isXsScreen = useMediaQuery("(max-width:600px)");
@@ -93,7 +97,7 @@ export default function Home() {
         campo2="Horários"
         link3="/informations"
         campo3="Informações"
-        link4="/"
+        link4="/Home"
         campo4="Categorias"
       />
       <Grid container spacing={0} sx={{ height: "100%" }}>

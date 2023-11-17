@@ -29,7 +29,7 @@ export default function Hours() {
         campo2="Horários"
         link3="/informations"
         campo3="Informações"
-        link4="/"
+        link4="/Home"
         campo4="Categorias"
       />
       <Grid container spacing={0} sx={{ height: "100%" }}>
@@ -45,7 +45,7 @@ export default function Hours() {
             ></img>
           </div>
         </Grid>
-        {isXsScreen? <MobileMenu link1="/" link2="#" link3="/informations" pageAtual="hours"/>:  ''}
+        {isXsScreen? <MobileMenu link1="/Home" link2="#" link3="/informations" pageAtual="hours"/>:  ''}
         <Grid container  spacing={2} columnSpacing={isXsScreen ? 1.7 : 0} style={{padding: 0,margin: 0, backgroundColor: 'rgba(0, 0, 0, 0.3)' }} >
           <HoursTable/>
         </Grid>

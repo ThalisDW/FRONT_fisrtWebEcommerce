@@ -7,7 +7,6 @@ import  Home  from './pages/home'
 import Informations from './pages/informations'
 import Hours from './pages/hours'
 import {Login} from './pages/login'
-import { useEffect, useState } from 'react'
 
 function App() {
 
