@@ -4,10 +4,11 @@ import AppBarMenu from "../../components/appBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CardCategories from "../../components/cards/cardCategories";
 import { MobileMenu } from "../../components/mobileMenu";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import validaToken from "../../functions/validaToken";
 
 export default function Home() {
+  const [dataProducts, setDataProducts] :any = useState()
  
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -17,55 +18,36 @@ export default function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/categorias", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            }
+          }
+        );
+        const data = await response.json();
+        setDataProducts(data)
+      } catch (error) {
+        console.error('Erro ao obter dados do banco de dados:', error);
+      }
+    };
+    fetchData();
+  }, []);
+  
+
   const isXsScreen = useMediaQuery("(max-width:600px)");
 
   interface ICategorias {
-    nome: string;
-    linkImg: string;
-    linkCat: string
+    nome_categoria: string;
+    url_foto: string;
+    id_categoria: number
   }
-  const categorias: ICategorias[] = [
-    {
-      nome: "Brigadeirão",
-      linkImg: "/images/trufa.png",
-      linkCat: "#"
-    },
-    {
-      nome: "Trufas",
-      linkImg: "/images/trufa.png",
-      linkCat: "#"
-    },
-    {
-      nome: "Panetone",
-      linkImg: "/images/trufa.png",
-      linkCat: "#"
-    },
-    {
-      nome: "Brownies",
-      linkImg: "/images/trufa.png",
-      linkCat: "#"
-    },
-    {
-      nome: "Petisqueira",
-      linkImg: "/images/trufa.png",
-      linkCat: "#"
-    },
-    {
-      nome: "Barras",
-      linkImg: "/images/trufa.png",
-      linkCat: "#"
-    },
-    {
-      nome: "Tortas",
-      linkImg: "/images/trufa.png",
-      linkCat: "#"
-    },
-    {
-      nome: "Linha Fit",
-      linkImg: "/images/trufa.png",
-      linkCat: "#"
-    },
-  ];
+
+
+  
 
   const estiloDiv = {
     height: isXsScreen ? 200 : 0,
@@ -103,8 +85,7 @@ export default function Home() {
       <Grid container spacing={0} sx={{ height: "100%" }}>
         <Grid
           item
-          xs={12}
-          sx={{ marginBottom: isXsScreen ? 0 : 2, boxShadow: 6 }}
+          sx={{ marginBottom: isXsScreen ? 0 : 2, boxShadow: 6, width: '100%' }}
         >
           <div style={estiloDiv}>
             <img
@@ -137,9 +118,9 @@ export default function Home() {
             backgroundColor: "rgba(0, 0, 0, 0.3)",
           }}
         >
-          {categorias.map((cat)=>(
-            <CardCategories image={cat.linkImg} linkCat={cat.linkCat} title={cat.nome}/>
-            ))}
+          {dataProducts && dataProducts.result && dataProducts.result.map((cat: ICategorias) => (
+            <CardCategories key={cat.nome_categoria} image={cat.url_foto} linkCat={cat.id_categoria} title={cat.nome_categoria}/>
+          ))}
         </Grid>
       </Grid>
     </Box>

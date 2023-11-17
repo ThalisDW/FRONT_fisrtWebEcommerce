@@ -7,43 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { MobileMenu } from "../../components/mobileMenu";
 
-export const ListProducts = () => {
-    // interface Products {
-    //     id: string;
-    //     title: string;
-    //     price: string;
-    //     image: string;
-    //     description: string;
-    // }
-
-    // const [data, setData] = useState<Products[]>([]);
-
-    // const listDataProducts = async () => {
-    //     const request = await fetch(`${BASE_URL_API}/products`);
-    //     const response = await request.json();
-    //     setData(response);
-    // };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       try {
-    //         const response = await fetch('/api.php'); // Faça uma requisição para o seu endpoint PHP
-    //         const jsonData = await response.json();
-    //         setData(jsonData);
-    //       } catch (error) {
-    //         console.error('Erro ao obter dados do banco de dados:', error);
-    //       }
-    //     };
-
-    //     fetchData();
-    // }, []);
-
-    useEffect(() => {
-        // listDataProducts();
-    }, []);
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    
+export const ListProducts = () => {    
 
     return (
         <>

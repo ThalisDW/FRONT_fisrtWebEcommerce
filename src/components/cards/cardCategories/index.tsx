@@ -18,13 +18,15 @@ const theme = createTheme({
 interface ICardCategories{
   title: string,
   image: string,
-  linkCat: string
+  linkCat: number
 }
 
 export default function CardCategories(props:ICardCategories) {
 
+  const setCat = () =>{
+    localStorage.setItem('categoria', String(props.linkCat))
+  }
   
-
 
 
   return (
@@ -35,7 +37,7 @@ export default function CardCategories(props:ICardCategories) {
           <Card sx={{ maxWidth: "43vw", borderRadius: 5}}>
           
             <CardActionArea>
-            <Link to={"/productsId"} style={{textDecoration:'none', color: 'inherit'}}>
+            <Link to={"/productsId"} onClick={setCat} style={{textDecoration:'none', color: 'inherit'}}>
               <CardMedia
                 component="img"
                 height="140"
