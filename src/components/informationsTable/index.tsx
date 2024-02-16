@@ -30,19 +30,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-// function createData(
-//   name: string,
-// ) {
-//   return { name};
-// }
-
-// const rows = [
-//   createData('Dinheiro'),
-//   createData('Cartão de débito'),
-//   createData('Cartão de crédito'),
-//   createData('Pix - CNPJ (39319907000143)')
-// ];
-
 export default function InformationsTable() {
   return (
     <TableContainer component={Paper}>
