@@ -64,9 +64,11 @@ export const Login = () => {
       } else if (data.message && data.result.length === 1) {
         const infosUser = data.result;
         infosUser.map((el: any) => {
-          if (el.user_token === "783JKl9a0s2P4ZQ") {
+          if (el.user_token != null) {
             const token = el.user_token;
+            const user_id = el.user_id;
             localStorage.setItem("token", token);
+            localStorage.setItem("user_id", user_id);
             window.location.assign('/Home')
           }
         });
@@ -104,34 +106,6 @@ export const Login = () => {
             {error && <ErrorModal isOpen={error} onClose={handleCloseErrorModal} />}
         </Grid>
         </Box>
-
-
-
-
-      {/* <div>
-        <h2>Login</h2>
-        <label>
-          Usuário:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Senha:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <button onClick={handleLogin}>Entrar</button>
-
-        {error && <ErrorModal isOpen={error} onClose={handleCloseErrorModal} />}
-      </div> */}
     </>
   );
 };
