@@ -19,6 +19,7 @@ import {
     tableCellClasses,
 } from "@mui/material";
 import styled from "styled-components";
+import addCarrinho from "../../functions/addCarrinho";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -71,16 +72,9 @@ export default function ProductsId() {
         categoria: string;
     }
 
-    const rows = [
-        createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-        createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-        createData("Eclair", 262, 16.0, 24, 6.0),
-        createData("Cupcake", 305, 3.7, 67, 4.3),
-        createData("Gingerbread", 356, 16.0, 49, 3.9),
-    ];
-
     const [dataProducts, setDataProducts]: any = useState();
-
+    const [reloadIconLoja, setReloadIconLoja]: any = useState(0);
+    
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
         if (storedToken == null) {
@@ -135,7 +129,7 @@ export default function ProductsId() {
                 padding: 0,
             }}
         >
-            <AppBarMenu
+            <AppBarMenu key={reloadIconLoja}
                 title="Trufas da Marcy"
                 link1="/listProducts"
                 campo1="Cardápio"
@@ -187,8 +181,6 @@ export default function ProductsId() {
                             <TableHead>
                                 <TableRow style={{ height: "2em" }}>
                                     <StyledTableCell>Brigadeiros</StyledTableCell>
-                                    <StyledTableCell align="right">Detalhes</StyledTableCell>
-                                    <StyledTableCell align="right">Valor</StyledTableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -196,7 +188,7 @@ export default function ProductsId() {
                                 {dataProducts &&
                                     dataProducts.result &&
                                     dataProducts.result.map((row: IProdutos) => (
-                                        <StyledTableRow style={{ height: "6em" }} key={row.nome}>
+                                        <StyledTableRow style={{ height: "6em" }} key={row.nome} onClick={()=> {addCarrinho(row); setReloadIconLoja(reloadIconLoja + 1)}}>
                                                 <StyledTableCell
                                                     component="th"
                                                     style={{ fontSize: "1em", padding: 0 }}

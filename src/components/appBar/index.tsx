@@ -11,8 +11,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import CookieIcon from '@mui/icons-material/Cookie';
-import { Link as RouterLink } from 'react-router-dom';
-
+import { Link, Link as RouterLink } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 interface IAppBar{
@@ -49,6 +49,17 @@ function AppBarMenu(props: IAppBar) {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const [cartItemCount, setCartItemCount] = React.useState(0);
+
+    React.useEffect(() => {
+        // Recupera a quantidade de itens do carrinho do localStorage
+        const cartItems = JSON.parse(localStorage.getItem('carrinho') || '[]');
+        // Atualiza o estado com a quantidade de itens
+        setCartItemCount(cartItems.length);
+        
+        
+    }, []);
 
     return (
         <AppBar position="static" sx={{margin:'none', padding:'none'}}>
@@ -125,7 +136,7 @@ function AppBarMenu(props: IAppBar) {
                             textDecoration: 'none',
                         }}
                     >
-                    <RouterLink style={{textDecoration:'none', color: 'inherit'}} to={'/'}>{props.title}</RouterLink>
+                    <RouterLink style={{textDecoration:'none', color: 'inherit'}} to={'/Home'}>{props.title}</RouterLink>
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
@@ -169,6 +180,25 @@ function AppBarMenu(props: IAppBar) {
                             ))}
                         </Menu>
                     </Box>
+                    <Link to={'/carrinho'} style={{ color: 'inherit', textDecoration: 'none' }}>
+                    <ShoppingCartIcon/>
+                    {cartItemCount > 0 && (
+                        <span style={{
+                        position: 'absolute',
+                        top: '2px',
+                        right: '-8px',
+                        backgroundColor: 'black',
+                        color: 'white',
+                        borderRadius: '50%',
+                        padding: '4px',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        }}>
+                        {cartItemCount}
+                        </span>
+                    )}
+                    </Link>
+                    
                 </Toolbar>
             </Container>
         </AppBar>
