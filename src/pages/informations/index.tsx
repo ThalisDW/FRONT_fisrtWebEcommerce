@@ -4,9 +4,19 @@ import AppBarMenu from "../../components/appBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {MobileMenu} from "../../components/mobileMenu";
 import InformationsTable from "../../components/informationsTable";
+import { useEffect } from "react";
+import validaToken from "../../functions/validaToken";
 
 export default function Informations() {
   const isXsScreen = useMediaQuery("(max-width:600px)");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken == null) {
+      validaToken()
+      
+    }
+  }, []);
 
   const estiloDiv = {
     height: isXsScreen ? 200 : 0,
@@ -49,25 +59,6 @@ export default function Informations() {
         <Grid container  spacing={2} columnSpacing={isXsScreen ? 1.7 : 0} style={{padding: 0,margin: 0, backgroundColor: 'rgba(0, 0, 0, 0.3)' }} >
           <InformationsTable/>
         </Grid>
-
-        {/* <CardProduct
-            id="7777"
-            perfil="MarcyTrufas"
-            title="TESTE"
-            summary="Brigadeiro de Nutella"
-            price="30,00"
-            description="{item.description}"
-            image="./images/trufa.png"
-          />
-          <CardProduct
-            id="7777"
-            perfil="MarcyTrufas"
-            title="TESTE"
-            summary="Brigadeiro de Nutella"
-            price="30,00"
-            description="{item.description}"
-            image="./images/trufa.png"
-          /> */}
       </Grid>
     </Box>
   );

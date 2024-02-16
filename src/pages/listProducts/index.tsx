@@ -6,8 +6,17 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { MobileMenu } from "../../components/mobileMenu";
+import validaToken from "../../functions/validaToken";
 
 export const ListProducts = () => {    
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        if (storedToken == null) {
+          validaToken()
+          
+        }
+      }, []);
 
     return (
         <>

@@ -4,9 +4,19 @@ import AppBarMenu from "../../components/appBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {MobileMenu} from "../../components/mobileMenu";
 import HoursTable from "../../components/hoursTable";
+import { useEffect } from "react";
+import validaToken from "../../functions/validaToken";
 
 export default function Hours() {
   const isXsScreen = useMediaQuery("(max-width:600px)");
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken == null) {
+      validaToken()
+      
+    }
+  }, []);
 
   const estiloDiv = {
     height: isXsScreen ? 200 : 0,
