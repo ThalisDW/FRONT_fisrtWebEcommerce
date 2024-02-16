@@ -7,19 +7,21 @@ import  Home  from './pages/home'
 import Informations from './pages/informations'
 import Hours from './pages/hours'
 import {Login} from './pages/login'
+import Carrinho from './pages/carrinho'
 
 function App() {
+
 
   return (
       <BrowserRouter>
         <Routes>
           <Route index element={<Login/>} ></Route>
           <Route path='/Home' element={<Home/>}></Route>
-          <Route path='/Home' element={<Home/>}></Route>
           <Route path='/ListProducts' element={<ListProducts/>}></Route>
           <Route path='/productsId' element={<ProductsId/>}></Route>
           <Route path='/informations' element={<Informations/>}></Route>
           <Route path='/hours' element={<Hours/>}></Route>
+          <Route path='/carrinho' element={<Carrinho/>}></Route>
         </Routes>
       </BrowserRouter>
   )
